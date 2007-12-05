@@ -1,0 +1,15 @@
+<% if @entry.errors.length != 0 %>
+<h3>The following errors occured with your submission:</h3>
+
+<ul>
+<% for error in @entry.errors %>
+<li><%= error %></li>
+<% end %>
+</ul>
+<% end %>
+
+<p><label for="entry_name">Name</label><br/>
+<%= text_field 'entry', 'name'  %></p>
+
+<p><label for="entry_description">Description</label><br/>
+<%= text_area 'entry', 'description'  %></p>

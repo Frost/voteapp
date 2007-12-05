@@ -1,0 +1,26 @@
+ändringar i voteapp w07:
+CHANGED: emailfältet var för kort, åtgärda!
+CHANGED: entry.name-fältet var för kort... fixat!
+CHANGED: lade till rules
+CHANGED: ändrade max filnamnslängd till 256 tecken, pga strul med inlämnade bidrag som inte gick att ladda ner.
+CHANGED: ändrade maxlängd på entry.name till 256. varför satte vi 32 på den limiten från början?
+FIXME: Det finns en bugg som gör att ticketno valideras flera gånger i rad, vilket gör att user/edit failar. Åtgärda problemet.
+FIXME: bygg om admin-interfacet. 
+FIXME: lägg in uppladdade filer i databasen!
+TODO: "Ladda ner alla godkända bidrag"-länk
+TODO: Approve/reject-länkar direkt i compo/show ??
+TODO: Gör en howto, alternativt en FAQ där det står en massa viktig info/regler om själva förfarandet i att ladda upp ett entry.
+TODO: Kom fram till vilka som ska kunna rösta... Alla borde nog kunna rösta, men man måste kunna särskilja valida röster.
+TODO: beskrivning på entries. gör så att de kan skriva in ascii... (lägg simple_format i en <pre>-tagg)
+TODO: comments på godkända bidrag
+TODO: fixa anledningar för rejects
+TODO: fixa ett subset av DHCC-användardatabasen, så att crew kan logga in med sina DHCC-lösenord och på så vis även kunna rösta... se också till att det bara är antagna crew som kan logga in.
+TODO: fixa progressbar-funktionalitet på compos istället för att bara välja en state.
+TODO: fixa till texter. gör så att så mycket av den infon admins kan lägga in renderas med textile
+TODO: instruktioner för stora bidrag. typ ftpserver eller nåt...
+TODO: konvertera repositoryt till git
+TODO: lägg till bilder till användare, så man kan få se hur folk ser ut.
+TODO: lägg till en competition-state där man säger vilka som vann (1:a och 2:a plats typ... )... vi ska kunna välja vilka som vinner, utifall deltagarna röstar helt åt helvete...
+TODO: möjlighet att generera resultatlistor (efter lagom mycket pillande...), i säg... ascii/textile/html
+TODO: notifications (mail?) till bidrag om gällande approved/rejected (två varianter av dem. en public och en private)
+TODO: olika färg i tabellerna i admin-gränssnittet (css-hack)

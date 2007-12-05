@@ -1,0 +1,46 @@
+<p>
+  <b>Name:</b> <%=h @competition.name %>
+</p>
+<p>
+  <b>Description:</b> <%= @competition.description %>
+</p>
+<p>
+  <b>Deadline date:</b> <%=h @competition.deadline_on %>
+</p>
+<p>
+  <b>State: </b> <%= @competition.state.name.capitalize %>
+<p>
+  <b>Entries:</b>
+  <table>
+	<tr>
+		<th>Artist</th>
+		<th>Name</th>
+		<th>State</th>
+		<th>Points</th>
+	</tr>
+		<% for entry in @entries -%>
+		<tr>
+			<td><%= link_to entry.user.login, :controller => "user", :action => "show", :id => entry.user %></td>
+			<td><%=h entry.name %></td>
+			<td><%= entry.state.name %></td>
+		<%# CHANGED: numera räknar den ut både antalet godkända röster (betalande besökare) och totala antalet röster, inom parentes %>
+		
+			<%# TODO: centrera den här raden %>
+			<%# TODO: mer förtydligande %>
+			<td>
+				Valid: <%= entry.valid_votes %> points in <%= entry.number_of_valid_votes %> votes. <br/> 
+				Total: <%= entry.total_votes %> points in <%= entry.votes.length %> votes.
+			</td>
+
+			<td><%= link_to 'Show', :action => 'show', :controller => 'entry', :id => entry %></td>
+			<td><%= link_to 'Edit', :action => 'edit', :controller => 'entry', :id => entry %></td>
+			<td><%= link_to 'Destroy', { :action => 'destroy', :controller => 'entry', :id => entry }, :confirm => 'Are you sure?', :post => true %></td>
+		</tr>
+		<% end -%>
+  </table>
+</p>
+
+<br/>
+
+<%= link_to 'Edit', :action => 'edit', :id => @competition %> |
+<%= link_to 'Back', :action => 'list' %>

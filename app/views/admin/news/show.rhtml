@@ -1,0 +1,27 @@
+<% for column in News.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @news.send(column.name) %>
+</p>
+<% end %>
+<p><b>Comments</b></p>
+<table>
+  <tr>
+  <% for column in NewsComment.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for news_comment in @news.news_comments %>
+  <tr>
+  <% for column in NewsComment.content_columns %>
+    <td><%=h news_comment.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :controller => 'comment', :id => news_comment %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :controller => 'comment', :id => news_comment %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => news_comment }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Edit', :action => 'edit', :id => @news %> |
+<%= link_to 'Back', :action => 'list' %>

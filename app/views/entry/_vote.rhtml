@@ -1,0 +1,47 @@
+<!--[form:vote]-->
+<% if entry.competition.state == CompetitionState.find_by_name("voting") %>
+<% if vote and vote.rating %>
+	<% stars = vote.rating %>
+<% else %>
+	<% stars = 0 %>
+<% end %>
+
+<script>
+function light_star_<%= entry.id %>(elem){
+	for(i=1; i <= parseInt(elem.value); i++){
+		subj = document.getElementById("star_<%= entry.id %>_"+i);
+		subj.src = "<%= image_path 'star.gif' %>";
+	}
+	for(i= (parseInt(elem.value)+1); i <= 5; i++){
+		subj = document.getElementById("star_<%= entry.id %>_"+i);
+		subj.src = "<%= image_path 'dot.gif' %>";
+	}
+}
+
+function reset_stars_<%= entry.id %>(){
+	for(i=1; i <= <%= stars %>; i++){
+		subj = document.getElementById("star_<%= entry.id %>_"+i);
+		subj.src = "<%= image_path 'star.gif' %>";
+		}
+	for(i= <%= stars + 1 %>; i <= 5; i++){
+		subj = document.getElementById("star_<%= entry.id %>_"+i);
+		subj.src = "<%= image_path 'dot.gif' %>";
+	}
+}
+
+function darken_stars_<%= entry.id %>(){
+	for(i=1; i <= 5; i++){
+		subj = document.getElementById("star_<%= entry.id %>_"+i);
+		subj.src = "<%= image_path 'dot.gif' %>";
+	}
+}
+</script>
+  
+<p>
+<input type="hidden" name="entry_id" value="<%= entry.id %>" />
+<input type="hidden" name="referer" value="<%= referer %>" />
+<input type="hidden" id="rating_<%= entry.id %>" name="rating" value="0" />
+<input type="image" name="rating_raw" value="0" onclick="document.getElementById('rating_<%= entry.id %>').value = this.value" onmouseover="darken_stars_<%= entry.id %>()" onmouseout="reset_stars_<%= entry.id %>()" src="<%= image_path "zero-empty.gif" %>"><% for i in (1..stars) %><input type="image" name="rating_raw" id="star_<%= entry.id %>_<%= i %>" value="<%= i %>" src="<%= image_path 'star.gif' %>" onclick="document.getElementById('rating_<%= entry.id %>').value = this.value" onmouseover="light_star_<%= entry.id %>(this)" onmouseout="reset_stars_<%= entry.id %>(this)"><% end %><% for i in ((stars+1)..5) %><input type="image" name="rating_raw"  id="star_<%= entry.id %>_<%= i %>" value="<%= i %>" src="<%= image_path 'dot.gif' %>" onclick="document.getElementById('rating_<%= entry.id %>').value = this.value" onmouseover="light_star_<%= entry.id %>(this)" onmouseout="reset_stars_<%= entry.id %>(this)"><% end %>
+</p>
+<% end %>
+<!--[eoform:vote]-->

@@ -1,0 +1,2 @@
+module Admin::InfoHelper
+end

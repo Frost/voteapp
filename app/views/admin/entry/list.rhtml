@@ -1,0 +1,27 @@
+<h1>Listing entries</h1>
+
+<table>
+  <tr>
+      <th>Name</th>
+      <th>State</th>
+      <th>Compo</th>
+  </tr>
+  
+<% for entry in @entries %>
+  <tr>
+    <td><%=h entry.name %></td>
+    <td><%=h entry.state.name.capitalize %></td>
+    <td><%=h entry.competition.name.capitalize %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => entry %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => entry %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => entry }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @entry_pages.current.previous } if @entry_pages.current.previous %>
+<%= link_to 'Next page', { :page => @entry_pages.current.next } if @entry_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New entry', :action => 'new' %>

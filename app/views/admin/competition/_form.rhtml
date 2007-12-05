@@ -1,0 +1,13 @@
+<%= error_messages_for 'competition' %>
+
+<p><label for="competition_name">Name</label><br/>
+<%= text_field 'competition', 'name'  %></p>
+
+<p><label for="competition_description">Description</label><br/>
+<%= text_area 'competition', 'description'  %></p>
+
+<p><label for="competition_deadline_on">Deadline</label><br/>
+<%= datetime_select 'competition', 'deadline_on'%></p>
+
+<p><label for="competition_competition_state_id">State</label><br/>
+<%= select("competition", "competition_state_id", CompetitionState.find(:all).collect{|e| [e.name.capitalize, e.id]}) %> </p>

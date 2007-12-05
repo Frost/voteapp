@@ -1,0 +1,28 @@
+<%= error_messages_for 'user' %>
+
+<!--[form:user]-->
+<p><label for="user_login">Login</label><br/>
+<%= text_field 'user', 'login'  %></p>
+
+<p><label for="user_password_hash">Password hash</label><br/>
+<%= password_field 'user', 'password_hash'  %></p>
+
+<p><label for="user_ticketno">Ticketno</label><br/>
+<%= text_field 'user', 'ticketno'  %></p>
+
+<p><label for="user_name">Name</label><br/>
+<%= text_field 'user', 'name'  %></p>
+
+<p><label for="user_email">Email</label><br/>
+<%= text_field 'user', 'email'  %></p>
+
+<p><label for="user_description">Description</label><br/>
+<%= text_area 'user', 'description'  %></p>
+
+<p><label for="user_updated_on">Updated on</label><br/>
+<%= datetime_select 'user', 'updated_on'  %></p>
+
+<p><label for="user_created_on">Created on</label><br/>
+<%= datetime_select 'user', 'created_on'  %></p>
+<!--[eoform:user]-->
+

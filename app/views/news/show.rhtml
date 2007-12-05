@@ -1,0 +1,46 @@
+<div class="newsitem">
+
+<div class="headline"><%=h @news.title %></div>
+
+<div class="text">
+
+<p class="meta">Posted by <%=h User.find(@news.user_id).login%> on <%=h @news.created_at.strftime("%Y-%m-%d %H:%M")%></p>
+
+<%= simple_format(@news.news_text) %>
+
+</div> <!-- end text -->
+
+<% if @news.news_comments.length > 0 -%>
+<p class="comments">Comments:</p>
+<dl>
+<% @news.news_comments.reverse.each {|comment|-%>
+<dt>Written by <%=h User.find(comment.user_id).login %> on <%= comment.created_at.strftime("%Y-%m-%d %H:%M")%></dt>
+<dd><%=h comment.comment_text %></dd>
+<% } -%>
+</dl>
+<% else -%>
+<p class="comments">No comments</p>
+<% end -%>
+
+<% if session[:user_id] != nil -%>
+
+<p class="commentlink"><%= link_to_function "Leave a comment &raquo;", "toggle(\'newscomment_#{@news.id}\')"%></p>
+
+<div id="newscomment_<%= @news.id %>">
+<%= form_tag( :action => 'comment', :id => @news.id) %>
+<%= error_messages_for 'news_comment' %>
+<p class="commentlink">Comment:</p>
+<p><%= text_area 'news_comment', 'comment_text', {:id => "news_comment_comment_text_#{@news.id}", :rows => 5, :cols => 40} %></p>
+<p><%= submit_tag "Submit"%></p>
+<%= end_form_tag %>
+</div> <!-- end newscomment -->
+
+<% else -%>
+
+<p class="commentlink">You must be logged in to leave a comment.</p>
+
+<% end -%>
+
+<script type="text/javascript">toggle('newscomment_<%= @news.id %>')</script>
+
+</div> <!-- end newsitem -->

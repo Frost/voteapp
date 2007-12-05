@@ -1,0 +1,39 @@
+<h1><%= @entry.name -%></h1>
+
+<p>Submitted by <%= @entry.user %></p>
+	
+<table class="widetable">
+<tr>
+	<td class="thumbnail">
+		<% if @entry.thumbnail == nil -%>
+			<%= image_tag "noimage.jpg"%>
+		<% else -%>
+			<%= image_tag url_for_file_column 'entry', 'thumbnail' %>
+		<% end -%>
+	</td>
+	<td><%=h @entry.description -%></td>
+	<td class="voting">
+		<%= form_tag(:controller => 'vote', :action => 'cast') %>
+		<% if @user %>
+			<% vote = Vote.find_by_entry_id_and_user_id(@entry.id, @user.id) %>
+		<% else %>
+			<% vote = nil %>
+		<% end %>
+		<% if @user and @user.roles.include?(Role.find_by_name("voter")) -%>
+		<%= render :partial => 'entry/vote', :locals => {:entry => @entry, :vote => vote, :referer => "entry"}%>
+		<% end -%>
+		<%= end_form_tag %>
+	</td>
+</tr>
+</table>
+
+<% if item_by @entry, session[:user_id] %>
+	<h2><% if @entry.competition.open? -%><%= link_to "Edit your submission", :action => "edit", :id => @entry %><% end -%></h2>
+<% else %>
+  <% if @entry.filename %>
+  <%# CHANGED: använder link_to url_for_file_column istället för någons hemmahack till ands-n-fail-hårdkodad nedladdningslänk %>
+  <h2><%= link_to ('Download this entry', url_for_file_column( 'entry', 'filename')) %>
+  <% else %>
+    No filename
+  <% end %></h2>
+<% end %>

@@ -1,0 +1,55 @@
+<p>
+  <b>Entry ID:</b> <%= @entry.id %>
+</p>
+<p>
+  <b>Artist: </b> <%= link_to @entry.user.login, :action => 'show', :controller => 'user', :id => @entry.user %> ( <%= @entry.user.id %> )
+</p>
+<p>
+  <b>Name:</b> <%=h @entry.name %>
+</p>
+  <b>Competition:</b> <%=h @entry.competition.name %>
+<p>
+  <b>Description:</b> <%=h @entry.description %>
+</p>
+<p>
+  <b>Thumbnail: </b> 
+  <% if @entry.thumbnail != nil %>
+    <img src="<%= url_for_file_column( 'entry', 'thumbnail') %>"/>
+  <% else %>
+    No tumbnail
+  <% end %>
+</p>
+  
+  <b>Filename:</b> 
+  <% if @entry.filename != nil %>
+    <%= link_to ('Download', url_for_file_column( 'entry', 'filename')) %>
+  <% else %>
+    No filename
+  <% end %>
+</p>
+<p>
+</p>
+<p>
+  <b>State:</b> <%= @entry.state.name.capitalize %>
+<p>
+  <b>Votes:</b> 
+<table border="0" cellspacing="0" cellpadding="5">
+	<tr>
+		<th>User</th>
+		<th>Rating</th>
+		<th>Valid?</th>
+	</tr>
+
+  <% for vote in @entry.votes %>
+	<tr>
+		<td><%= vote.user %></td>
+		<td><%= vote.rating %></td>
+		<td><%= vote.user.status == "user" ? "Yes" : "" %></td>
+	</tr>
+  <% end %>
+</table>
+</p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @entry %> |
+<%= link_to 'Back to competition', :action => 'show', :controller => "competition", :id => @entry.competition_id %>
+<%= link_to 'Back', :controller => 'competition', :action => 'list' %>

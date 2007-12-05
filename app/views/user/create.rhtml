@@ -1,0 +1,13 @@
+<h1>Register</h1>
+<p>
+	<%= textilize("
+	**IMPORTANT:**
+	
+	* Only votes from attendees with valid ticket numbers will be counted
+	* Only entries from attendees will valid ticket numbers will be able to win compos.
+	")%>
+</p>
+<%= form_tag %>
+	<%= render :partial => 'form' %>
+	<%= submit_tag 'Register' %>
+<%= end_form_tag %>

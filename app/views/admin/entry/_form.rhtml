@@ -1,0 +1,31 @@
+<% if @entry.errors.length != 0 %>
+<h3>The following errors occured with your submission:</h3>
+
+<ul>
+<% for error in @entry.errors %>
+<li><%= error %></li>
+<% end %>
+</ul>
+<% end %>
+
+<p><label for="entry_name">Name</label><br/>
+<%= text_field 'entry', 'name'  %></p>
+
+<p><label for="entry_usder_id">User</label><br/>
+<%= select('entry', 'user_id', User.find(:all).collect{|e| [e.login, e.id]}) %>
+
+<p><label for="entry_competition">Competition</label><br/>
+<%= select("entry", "competition_id", Competition.find(:all).collect{|e| [e.name, e.id]})%>
+
+<p><label for="entry_entry_state_id">State</label><br/>
+<%= select("entry", "entry_state_id", EntryState.find(:all).collect{|e| [e.name.capitalize, e.id]}) %> </p>
+
+<p><label for="entry_description">Description</label><br/>
+<%= text_area 'entry', 'description'  %></p>
+
+<p><label for="entry_filename">Filename</label>
+   (Allowed file types is .zip, .rar, .tar.bz2 and .tar.gz)<br/>
+<%= file_column_field 'entry', 'filename'  %></p>
+
+<p><label for="entry_filename">Thumbnail (Allowed file types is .jpg, .gif and .png)</label><br/>
+<%= file_column_field 'entry', 'thumbnail'  %></p>

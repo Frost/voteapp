@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<%= javascript_include_tag :defaults %>
+<title>dh.scene</title>
+
+</head>
+
+<body>
+
+<div id="supercontainer">
+
+<div id="container">
+
+<div id="header">
+
+<div id="login">
+
+<% 
+if session[:user_id] 
+    user = User.find(session[:user_id])        
+    %>
+
+<p>Logged in as <%=h user.login != nil ? user.login : "Anonymous voter" %>.</p>
+
+<% else %>
+
+<form action="/user/login/" method="post" accept-charset="utf-8">
+
+<p>
+	<label for="user_login">username</label>
+	<input id="user_login" name="user[login]" class="text" type="text" value="" />
+</p>
+
+<p>
+	<label for="user_password">password</label>
+	<input id="user_password" name="user[password]" class="text" type="password" value="" />
+</p>
+
+<p>
+	<input class="submit" type="submit" value="Login" />
+</p>
+
+</form>
+
+<% if flash[:login_error] -%>
+<p style="color:red;"><%= flash[:login_error] %></p>
+<% end -%>
+
+<% end %>
+</div> <!-- end login -->
+
+</div> <!-- end header -->
+
+<div id="links">
+
+<%= link_to "News", :controller => 'news' %>
+<span>|</span>
+<%= link_to "Info", :controller => 'info' %>
+<span>|</span>
+<%= link_to "Competitions", :controller => 'competition' %>
+<span>|</span>
+<%= link_to "Rules", :controller => "rules"%>
+<% if session[:user_id] %>
+	
+	<span>|</span>
+	<%= link_to "My Profile", :controller => 'user', :action => 'show', :id => session[:user_id] -%>
+	
+	<span>|</span>
+	<%= link_to "Log out", :controller => 'user', :action => 'logout' -%>
+	
+	<% if user.roles.include?(Role.find_by_name("root")) %>
+		<span>|</span>
+		<%= link_to "Backstage", :controller => 'admin' %>
+	<% end %>
+	
+<% else %>
+	
+	<span>|</span>
+	<%= link_to "Register", :controller => 'user', :action => 'create' %>
+	
+<% end %>
+
+</div> <!-- end links -->
+
+<div id="content">
+
+<%= @content_for_layout %>
+
+</div> <!-- end content -->
+
+<div id="footer">
+<p>
+<%=  ""
+#link_to "Presented in association with", "http://nordicgameprogram.org/" 
+%></p>
+<%= "" 
+#link_to (image_tag("norden.gif"), "http://nordicgameprogram.org/") 
+%>
+</div> <!-- end footer -->
+
+</div> <!-- end container -->
+
+</div> <!-- end supercontainer -->
+
+</body>
+
+</html>

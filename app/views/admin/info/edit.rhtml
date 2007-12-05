@@ -1,0 +1,11 @@
+<h3>Editing InfoPage</h3>
+
+<%= start_form_tag :action => 'edit', :id => @info %>
+  <%= text_area "info", "infotext" %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'index', :id => @info %> |
+<%= link_to 'Back', :action => 'index' %>
+
+</p>

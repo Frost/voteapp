@@ -1,0 +1,19 @@
+<% if @close %>
+<script>
+window.opener.location = window.opener.location
+window.close();
+</script>
+<% end %>
+
+<%= flash[:notice] %>
+
+<%= form_tag %>
+
+<p><label for="user_ticketno">Ticket Number</label><br/>
+<%= text_field("user", "ticketno") %></p>
+
+<input type="hidden" name="referer" value="<%= @referer %>">
+<input type="hidden" name="rating" value="<%= @rating %>">
+<input type="hidden" name="entry_id" value="<%= @entry_id %>">
+<input type="submit" value="OK">
+<%= end_form_tag %>

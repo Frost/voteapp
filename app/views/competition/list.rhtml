@@ -1,0 +1,45 @@
+<h1>Competitions</h1>
+
+<% if not session[:user_id]%>
+<p>To enter a competition or vote you have to <%= link_to "create an account", :controller => 'user', :action => 'create' %> and log in. To vote you will need your ticket number.</p>
+<% end %>
+
+<table class="widetable">
+
+<% for which_competition in [@voting_competitions, @pending_competitions, @open_competitions, @closed_competitions] %>
+<% for competition in which_competition %>
+
+<tr>
+<td>
+	<h3><%= link_to competition.name, :action => 'show', :id => competition %></h3>
+</td>
+<td>
+
+<% if competition.state == CompetitionState.find_by_name("open") and not competition.reached_deadline? %>
+	
+	<p>This competition is open to submissions. The deadline is in <%= distance_of_time_in_words(Time.now, competition.deadline_on) %>. There <%= pluralize (competition.entries.length, "is 1 entry.", "are %d entries.")%></p>
+	
+	<% elsif competition.state == CompetitionState.find_by_name("open") and competition.reached_deadline? %>
+	
+	<p>This competition is still open to submissions but you only have a few minutes left to post your submission. There <%= pluralize (competition.entries.length, "is 1 entry.", "are %d entries.")%></p>
+
+  <% elsif competition.state == CompetitionState.find_by_name("pending") %>
+  
+  <p>This competition is closed to submissions. We are currently approving entries that will be shown on the big screen. At the moment, there are <%= approved_entries(competition).length %> approved entries.</p>
+	
+	<% elsif competition.state == CompetitionState.find_by_name("voting") %>
+  	
+  <p>Now you can vote for your favorite! There are <%= approved_entries(competition).length %> entries to choose from.</p>
+	
+<% elsif competition.state == CompetitionState.find_by_name("closed") %>
+  
+	<p>This competition is over. There <%= pluralize (approved_entries(competition).length, "were 1 aproved entry.", "were %d aproved entries ")%> and there <%= pluralize (competition.entries.length, "were 1 entry.", "were %d total entries.")%></p>
+
+<% end %>
+</td>
+</tr>
+
+<% end %>
+<% end %>
+
+</table>

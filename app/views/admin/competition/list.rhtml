@@ -1,0 +1,26 @@
+<h1>Listing competitions</h1>
+<table>
+  <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>State</th>
+  </tr>
+  
+<% for competition in @competitions %>
+  <tr>
+    <td><%=h competition.name %></td>
+    <td><%=h competition.deadline_on.strftime('%A %H:%M') %></td>
+    <td><%=h competition.state.name.capitalize %></th>
+    <td><%= link_to 'Show', :action => 'show', :id => competition %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => competition %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => competition }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @competition_pages.current.previous } if @competition_pages.current.previous %>
+<%= link_to 'Next page', { :page => @competition_pages.current.next } if @competition_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New competition', :action => 'new' %>

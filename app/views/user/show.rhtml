@@ -1,0 +1,11 @@
+<h1><%=h @user.login %></h1>
+
+<p><b>Name:</b> <%=h @user.name %></p>
+<p>
+	<b>Description:</b><br />
+	<%=h @user.description %>
+</p>
+
+<% if session[:user_id] == @user.id %>
+	<%= link_to 'Edit', :action => 'edit', :id => @user %>
+<% end %>

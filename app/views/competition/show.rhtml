@@ -1,0 +1,81 @@
+<h1><%=h @competition.name %></h1>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice]%></p>
+<% end %>
+
+<% if flash[:error] %>
+  <p style="color:red"><%= flash[:error] %></p>
+<% end %>
+
+<%= textilize(@competition.description) %>
+
+<% if @competition.state == CompetitionState.find_by_name("open") %>
+  <% if not @competition.reached_deadline? %>
+    <p>This competition is open to submissions. The deadline is in <%= distance_of_time_in_words(Time.now, @competition.deadline_on) %>. There <%= pluralize (@total_num_entries, "is 1 entry.", "are %d entries.")%></p>
+  <% else %>
+    <p>This competition is still open to submissions but you only have a few minutes left to post your submission. There <%= pluralize (@total_num_entries, "is 1 entry.", "are %d entries.")%></p>
+  <% end %>
+<% if session[:user_id] %>
+<% if entry_in_competition? @competition %>
+<h2><%= link_to "Edit your submission", :controller => "entry", :action => "edit", :id => @user_entry.id %></h2>
+<% else %>
+<h2><%= link_to "Submit an entry", :controller => "entry", :action => "new", :id => @competition %></h2>
+<% end %>
+<% end %>
+
+<% elsif @competition.state == CompetitionState.find_by_name("pending") %>
+  <p>This competition is closed to submissions. We are currently approving entries that will be shown on the big screen.</p>
+
+<% elsif @competition.state == CompetitionState.find_by_name("voting") %>
+  <p>This competition is closed to submissions. Now you can vote for your favorite! <%= pluralize(@entries.length, "There is only 1 entry.", "There are %d entries to choose from.")%></p>
+
+<% elsif @competition.state == CompetitionState.find_by_name("closed") %>
+  <p>This competition is over. There were <%= @entries.length %> approved entries.</p>
+
+<% end %>
+
+
+<% if @competition.state == CompetitionState.find_by_name("closed") or @competition.state == CompetitionState.find_by_name("voting") and @entries.length > 0 %>
+
+<h2>Entries</h2>
+
+<p>You can vote at all contributions. Give fives to your favourites and ones/zeroes to the ones you like the least. A five means 5 points, four means 4 points, ..., one means 1 point and no vote counts as 0 points. In the end, we will sum up all points settle the winners!</p>
+
+<p>We will validate all ticket numbers and count only the valid votes.</p>
+  
+<table class="widetable">
+
+<% for entry in @entries %>
+
+<tr>
+	<td class="thumbnail">
+		<% if entry.thumbnail == nil -%>
+			<%= link_to(image_tag("noimage.jpg"), :controller => 'entry', :action => 'show', :id => entry) %>
+		<% else -%>
+			<%= link_to(image_tag(url_for_file_column entry, "thumbnail"), :controller => 'entry', :action => 'show', :id => entry) %>
+		<% end -%>
+	</td>
+	<td>
+		<h1><%= link_to entry.name, :controller => "entry", :action => "show", :id => entry -%></h1>
+		<p>Submitted by <%= entry.user -%></p>
+	</td>
+	<td class="voting">
+		<%= form_tag(:controller => 'vote', :action => 'cast') %>
+		<% if @user %>
+			<% vote = Vote.find_by_entry_id_and_user_id(entry.id, @user.id) %>
+		<% else %>
+			<% vote = nil %>
+		<% end %>
+		<% if @user and @user.roles.include?(Role.find_by_name("voter")) -%>
+		<%= render :partial => 'entry/vote', :locals => {:entry => entry, :vote => vote, :referer => "competition"}%>
+		<% end -%>
+		<%= end_form_tag %>
+	</td>
+</tr>
+
+<% end %>
+
+</table>
+
+<% end %>

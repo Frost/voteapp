@@ -1,0 +1,13 @@
+<%= error_messages_for 'vote' %>
+
+<!--[form:vote]-->
+<p><label for="vote_ip">Ip</label><br/>
+<%= text_field 'vote', 'ip'  %></p>
+
+<p><label for="vote_value">Value</label><br/>
+<%= text_field 'vote', 'value'  %></p>
+
+<p><label for="vote_created_date">Created date</label><br/>
+<%= datetime_select 'vote', 'created_date'  %></p>
+<!--[eoform:vote]-->
+

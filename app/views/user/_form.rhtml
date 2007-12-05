@@ -1,0 +1,89 @@
+<% if @user.errors.length != 0 %>
+<h3>The following errors occured with your submission:</h3>
+
+<ul>
+<% for error in @user.errors%>
+<li><%= error %></li>
+<% end %>
+</ul>
+<% end %>
+
+<% if flash[:notice ]%>
+<p><%= flash[:notice] %></p>
+<% end %>
+
+<p><label for="user_login">Login name</label><br/>
+<%= text_field("user", "login") %></p>
+
+<p><label for="user_password">Password</label><br/>
+<%= password_field("user", "password") %></p>
+
+<p><label for="user_name">Real Name</label><br/>
+<%= text_field 'user', 'name'  %></p>
+
+<p><label for="user_email">Email</label><br/>
+<%= text_field 'user', 'email'  %></p>
+
+<p><label for="user_address">Address</label><br/>
+<%= text_field 'user', 'address'  %></p>
+
+<p><label for="user_seat">Seat</label><br/>
+<%= text_field 'user', 'seat'  %></p>
+
+<p>I am a...</p>
+
+<p>
+  <%
+  if @user.status.nil?
+  %>
+    <%= radio_button "user", "status", "user", :checked => "checked", :onclick => "Element.hide('sponsor_info', 'crew_info'); Element.show('attendee_info');"%>
+  <% else%>
+    <%= radio_button "user", "status", "user", :onclick => "Element.hide('sponsor_info', 'crew_info'); Element.show('attendee_info');"%>
+  <% end %>
+  <label for="user_status">attendee with a ticket number</label>
+</p>
+
+<div id="attendee_info" <% if @user.status != 'user' %>style="display: none;"<% end %> >
+  <p><label for="user_ticketno">Ticket Number</label><br/>
+  <%= text_field("user", "ticketno") %></p>
+</div>
+
+<p>
+  <%= radio_button "user", "status", "crew", :onclick => "Element.hide('sponsor_info', 'attendee_info'); Element.show('crew_info');" %>
+  <label for="user_status">crew</label>
+</p>
+
+<div id="crew_info" <% if @user.status != 'crew' -%>style="display: none;"<% end -%> >
+  <p><label for="user_team">Team</label><br/>
+  <%= text_field 'user', 'team'  %></p>
+  
+  <p><label for="user_cc_nick">Crew Corner Username</label><br/>
+  <%= text_field 'user', 'cc_nick'  %></p>
+</div>
+
+<p>
+  <%= radio_button "user", "status", "sponsor", :onclick => "Element.hide('attendee_info', 'crew_info'); Element.show('sponsor_info');" %>
+  <label for="user_status">sponsor</label>
+</p>
+
+<div id="sponsor_info" <% if @user.status != 'sponsor' %>style="display: none;"<% end %> >
+  <p><label for="user_sponsor">Sponsor company</label><br/>
+  <%= text_field 'user', 'company'  %></p>
+</div>
+
+<p>
+	<%= radio_button "user", "status", "visitor", :onclick => "Element.hide('attendee_info', 'crew_info', 'sponsor_info');"%>
+	<label for="user_status">visitor</label>
+</p>
+
+<script type="text/javascript" charset="utf-8">
+<% if @user.status != nil %>
+  Element.show('<%= @user.status %>_info');
+<% else %>
+  Element.show('attendee_info');
+<% end %>
+</script>
+
+<p><label for="user_description">Description</label><br/>
+<%= text_area 'user', 'description'  %></p>
+

@@ -1,0 +1,10 @@
+<%= error_messages_for 'news_comment' %>
+
+<!--[form:news_comment]-->
+<p><label for="news_comment_created_at">Created at</label><br/>
+<%= datetime_select 'news_comment', 'created_at'  %></p>
+
+<p><label for="news_comment_comment_text">Comment text</label><br/>
+<%= text_area 'news_comment', 'comment_text'  %></p>
+<!--[eoform:news_comment]-->
+

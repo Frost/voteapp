@@ -1,0 +1,290 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+img
+{
+	border: 0;
+}
+
+a
+{
+	color: #ff9f00;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+html
+{
+	height: 100%;
+}
+
+body
+{
+	background-color: #000000;
+	background-image: url(/images/bg.gif);
+	background-position: top center;
+	background-repeat: repeat;
+	color: #ffffff;
+	font-family: "trebuchet ms", sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 100%;
+	width: 100%;
+}
+
+div#supercontainer
+{
+	background-image: url(/images/bg-top.gif);
+	background-position: top center;
+	background-repeat: repeat-x;
+	height: 100%;
+	width: 100%;
+}
+
+div#container
+{
+	height: 100%;
+	margin: 0px auto;
+	width: 768px;
+}
+
+div#header
+{
+	background-image: url(/images/logo.gif);
+	background-position: 30px 0px;
+	background-repeat: no-repeat;
+	clear: both;
+	height: 164px;
+}
+
+div#header div#login
+{
+	position: relative;
+	
+	left: 500px;
+	top: 56px;
+	
+	height: 75px;
+	width: 225px;
+}
+
+div#header div#login p
+{
+	line-height: 50px;
+}
+
+div#header div#login form
+{}
+
+div#header div#login form p
+{
+	height: 24px;
+	line-height: 24px;
+	
+	float: left;
+	vertical-align: middle;
+}
+
+div#header div#login form p label
+{
+	margin-right: 4px;
+	text-transform: uppercase;
+	
+	float: left;
+	vertical-align: middle;
+}
+
+div#header div#login form p input
+{
+	margin: 4px;
+}
+
+div#header div#login form p input.text
+{
+	float: right;
+	vertical-align: middle;
+	width: 150px;
+}
+
+div#header div#login form p input.submit
+{
+	float: right;
+}
+
+div#links
+{
+	padding-right: 60px;
+	padding-left: 60px;
+	text-transform: uppercase;
+}
+
+div#links span
+{
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+div#content
+{
+	padding-top: 24px;
+	padding-right: 60px;
+	padding-bottom: 24px;
+	padding-left: 60px;
+}
+
+div#content h1
+{
+	font-size: 21px;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
+div#content h2
+{
+	font-size: 19px;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
+div#content h3
+{
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
+div#content p
+{
+	margin-bottom: 16px;
+	text-align: justify;
+}
+
+div#content p.indent
+{
+	margin-bottom: 16px;
+	padding-left: 16px;
+}
+
+div#content table
+{}
+
+div#content table tr
+{}
+
+div#content table tr td
+{
+	text-align: left;
+	vertical-align: middle;
+}
+
+div#content table tr td.thumbnail
+{
+	width: 170px;
+}
+
+div#content table tr td.voting
+{
+	width: 140px;
+}
+
+div#content table tr td h1, h2, h3, p
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+div#content table.widetable
+{
+	width: 100%;
+}
+
+div#content div.newsitem
+{
+	margin-bottom: 16px;
+}
+
+div#content div.newsitem div.headline
+{
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+div#content div.newsitem div.text
+{}
+
+div#content div.newsitem div.text p
+{
+	margin-bottom: 8px;
+}
+
+div#content div.newsitem div.text p.meta
+{
+	font-style: italic;
+}
+
+div#content div.newsitem p.comments
+{
+	font-size: 13px;
+	margin-bottom: 8px;
+}
+
+div#content div.newsitem p.commentlink
+{
+	font-size: 13px;
+	margin-bottom: 8px;
+}
+
+div#content div.newsitem dl
+{}
+
+div#content div.newsitem dt
+{
+	font-style: italic;
+	margin-bottom: 4px;
+	padding-left: 8px;
+}
+
+div#content div.newsitem dd
+{
+	margin-bottom: 16px;
+	padding-left: 16px;
+}
+
+/* TODO: indent */
+
+div#content ul
+{
+	margin-bottom: 16px;
+}
+
+div#content ul li
+{
+	margin-left: 16px;
+}
+
+div#content ol
+{
+	margin-bottom: 16px;
+}
+
+div#content ol li
+{
+	margin-left: 16px;
+}
+
+div#footer
+{
+	clear: both;
+	padding-bottom: 12px;
+	text-align: center;
+}

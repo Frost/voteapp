@@ -1,0 +1,11 @@
+<h3>Editing RulesPage</h3>
+
+<%= start_form_tag :action => 'edit', :id => @rules %>
+  <%= text_area "rules", "ruletext" %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'index', :id => @rules %> |
+<%= link_to 'Back', :action => 'index' %>
+
+</p>

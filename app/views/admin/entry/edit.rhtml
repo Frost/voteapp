@@ -1,0 +1,10 @@
+<h1>Editing entry</h1>
+<%= start_form_tag({ :action => 'update', :id => @entry }, {:multipart => true}) %>
+  <%= render :partial => 'form' %>
+  <p><%= @entry.filename %></p>
+  <p><%= @entry.thumbnail %></p>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @entry %> |
+<%= link_to 'Back', :action => 'list' %>

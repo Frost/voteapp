@@ -1,0 +1,22 @@
+<h1>New entry in <%= @competition.name %></h1>
+
+<%= start_form_tag({ :action => 'new', :id => @competition }, {:multipart => true}) %>
+  <%= render :partial => 'form' %>
+  
+  <p><label for="entry_filename">Filename</label>
+     (Allowed file types is .zip, .tar, .gz, .bz2, .tgz, .rar, .tar.bz2 and .tar.gz)
+     If your file is larger than around 50 MB, please send an email to us at 
+     dreamhack <em>at</em> data <em>dot</em> nu and we will provide a more suitable
+     way to upload the file.<br/>
+<!-- TODO: vi borde sätta dit en annan mailadress... -->
+  <%= file_column_field 'entry', 'filename'  %>
+  <!-- Due to server problems, file uploads are currently disabled -->
+  </p>  
+
+  <p><label for="entry_filename">Thumbnail (Allowed file types is .jpg, .gif and .png)</label><br/>
+  <%= file_column_field 'entry', 'thumbnail'  %></p>
+  
+  <%= submit_tag "Create" %>
+<%= end_form_tag %>
+
+<%= link_to 'Back', :controller => 'competition', :action => 'list' %>

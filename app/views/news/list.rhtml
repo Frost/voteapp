@@ -1,0 +1,38 @@
+<h1>News</h1>
+
+<% @news.each {|newsitem| -%>
+
+<div class="newsitem">
+
+<div class="headline"><%= link_to newsitem.title, :action => 'show', :id => newsitem.id %></div>
+
+<div class="text">
+
+<p class="meta">Posted by <%=h User.find(newsitem.user_id).login%> on <%=h newsitem.created_at.strftime("%Y-%m-%d %H:%M")%></p>
+
+<%= textilize(newsitem.news_text)%>
+
+</div> <!-- end text -->
+
+<p class="comments"><% if newsitem.news_comments.length > 0 -%><%= link_to "#{newsitem.news_comments.length} comments", :action => 'show', :id => newsitem.id%><% else -%>No comments<% end -%></p>
+
+<% if session[:user_id] != nil -%>
+
+<p class="commentlink"><%= link_to_function "Leave a comment &raquo;", "toggle(\'newscomment_#{newsitem.id}\')"%></p>
+
+<div id="newscomment_<%= newsitem.id %>">
+<%= form_tag( :action => 'comment', :id => newsitem.id) %>
+<%= error_messages_for 'news_comment' %>
+<p class="commentlink">Comment:</p>
+<p><%= text_area 'news_comment', 'comment_text', {:id => "news_comment_comment_text_#{newsitem.id}", :rows => 5, :cols => 40} %></p>
+<p><%= submit_tag "Submit"%></p>
+<%= end_form_tag %>
+</div> <!-- end newscomment -->
+
+<% end -%>
+
+<script type="text/javascript">toggle('newscomment_<%= newsitem.id %>')</script>
+
+</div> <!-- end newsitem -->
+
+<% } -%>
