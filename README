@@ -5,3 +5,10 @@ This is an app used for uploading and voting of compos during dreamhack (DHW06 a
 Most of the comments are written in swedish, and I haven't had the time to translate that.
 
 This will probably be needing some patching up to run on fresh rails, but for starters, you're going to need working rmagick for this.
+
+
+UPDATE 2011-04-26
+
+Adam Doupé (https://github.com/adamdoupe) has pointed out that VoteApp contains possible Execution After Redirect vulnerabilities. 
+
+If anyone want to use this piece of software, you might want to look into that, preferably using Adam's EAR detection tool: https://github.com/adamdoupe/find_ear_rails
